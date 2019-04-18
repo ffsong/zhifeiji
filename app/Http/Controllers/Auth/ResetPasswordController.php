@@ -43,5 +43,5 @@ class ResetPasswordController extends Controller
         session()->flash('success', '密码更新成功，您已成功登录！');
         return redirect($this->redirectPath());
     }
-    
+
 }
