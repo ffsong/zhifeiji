@@ -25,8 +25,8 @@ class TopicController extends Controller
 
     public function show(Topic $topic)
     {
-        return '创建成功--'.$topic->title;
-        return view('topics.show',$topic);
+
+        return view('topics.show', compact('topic'));
     }
 
     public function create(Topic $topic)
