@@ -67,6 +67,7 @@ class TopicController extends Controller
         return redirect()->route('topics.index')->with('success', '成功删除！');
     }
 
+
     //话题图片上传
     public function uploadImage(Request $request, ImageUploadHandler $uploader)
     {

@@ -44,4 +44,11 @@ return [
         ],
     ],
 
+    //百度api授权认证信息
+    'baidu_translate' => [
+        'appid' => env('BAIDU_TRANSLATE_APPID'),
+        'key'   => env('BAIDU_TRANSLATE_KEY'),
+    ],
+
+
 ];

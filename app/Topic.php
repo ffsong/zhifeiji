@@ -49,4 +49,18 @@ class Topic extends Model
         return $query->orderBy('created_at', 'desc');
     }
 
+
+    /*
+     * 路由显示更改 以下两种都适应
+     * http://larabbs.test/topics/115
+     * http://larabbs.test/topics/115/slug-translation-test
+     *
+     * */
+
+    public function link($params = [])
+    {
+        return route('topics.show', array_merge([$this->id, $this->slug], $params));
+    }
+
+
 }
