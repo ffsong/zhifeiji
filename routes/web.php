@@ -37,8 +37,8 @@ Route::get('email/resend', 'Auth\VerificationController@resend')->name('verifica
 Route::resource('users', 'UserController', ['only' => ['show', 'update', 'edit']]);
 
 //话题
-Route::resource('topics', 'TopicsController', ['only' => ['index', 'create', 'store', 'update', 'edit', 'destroy']]);
-Route::get('topics/{topic}/{slug?}', 'TopicsController@show')->name('topics.show');
+Route::resource('topics', 'TopicController', ['only' => ['index', 'create', 'store', 'update', 'edit', 'destroy']]);
+Route::get('topics/{topic}/{slug?}', 'TopicController@show')->name('topics.show');
 
 
 //话题图片上传
