@@ -44,15 +44,19 @@ class TopicController extends Controller
         return redirect()->route('topics.show', $topic->id)->with('success', '帖子创建成功！');
     }
 
-    public function eidt(Topic $topic)
+    public function edit(Topic $topic)
     {
+        $this->authorize('update', $topic);
         $categories = Category::all();
         return view('topics.create_and_edit', compact('topic', 'categories'));
     }
 
-    public function update()
+    public function update(TopicRequest $request, Topic $topic)
     {
-        
+        $this->authorize('update', $topic);
+        $topic->update($request->all());
+
+        return redirect()->route('topics.show', $topic->id)->with('success', '更新成功！');
     }
 
     //话题图片上传
