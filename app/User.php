@@ -51,4 +51,13 @@ class User extends Authenticatable implements MustVerifyEmailContract
         return $this->hasMany(Reply::class);
     }
 
+    /*
+     * 本地作用域的方式
+     * return 始终返回查询构造器
+     */
+    public function scopeRecent($query)
+    {
+        return $query->orderBy('id', 'desc');
+    }
+
 }

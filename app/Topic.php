@@ -56,6 +56,7 @@ class Topic extends Model
     }
 
 
+
     /*
      * 路由显示更改 以下两种都适应
      * http://larabbs.test/topics/115
