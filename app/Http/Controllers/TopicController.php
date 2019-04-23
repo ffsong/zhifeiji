@@ -8,6 +8,7 @@ use Auth;
 use App\Category;
 use App\Http\Requests\TopicRequest;
 use App\Handlers\ImageUploadHandler;
+use App\User;
 
 class TopicController extends Controller
 {
@@ -16,11 +17,12 @@ class TopicController extends Controller
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
 
-    public function index(Request $request, Topic $topic)
+    public function index(Request $request, Topic $topic, User $user)
     {
         $topics = $topic->withOrder($request->order)->paginate(20);
-
-        return view('topics.index', compact('topics'));
+        //获取活跃用户
+        $active_users = $user->getActiveUsers();
+        return view('topics.index', compact('topics', 'active_users'));
     }
 
     public function show(Topic $topic)
@@ -90,7 +92,4 @@ class TopicController extends Controller
         }
         return $data;
     }
-
-
-
 }
