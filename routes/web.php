@@ -56,3 +56,4 @@ Route::resource('categories', 'CategorieController', ['only' => ['show']]);
 
 
 
+

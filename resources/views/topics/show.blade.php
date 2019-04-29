@@ -2,7 +2,9 @@
 
 @section('title', $topic->title)
 @section('description', $topic->excerpt)
-
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('css/markdown.css') }}" media="screen" charset="utf-8" />
+@stop
 @section('content')
 
     <div class="row">
@@ -75,22 +77,3 @@
     </div>
 @stop
 
-@section('scripts')
-    <script type="text/javascript" src="{{ asset('showdown\dist\showdown.min.js') }}"></script>
-
-    <script>
-        $(document).ready(function() {
-           var compiles = function compile(){
-                //获取要转换的文字
-                var text = document.getElementById("topic-body").innerHTML;
-                //创建实例
-                var converter = new showdown.Converter();
-                //进行转换
-                var html = converter.makeHtml(text);
-                //展示到对应的地方  result便是id名称
-                document.getElementById("topic-body").innerHTML = html;
-            }
-            compiles();
-        });
-    </script>
-@stop
