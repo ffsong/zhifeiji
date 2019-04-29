@@ -39,7 +39,7 @@
                         {{ $topic->reply_count }}
                     </div>
 
-                    <div class="topic-body mt-4 mb-4">
+                    <div class="topic-body mt-4 mb-4" id="topic-body">
                         {!! $topic->body !!}
                     </div>
 
@@ -71,7 +71,26 @@
                     @include('topics._reply_list', ['replies' => $topic->replies()->with('user')->get()])
                 </div>
             </div>
-
         </div>
     </div>
+@stop
+
+@section('scripts')
+    <script type="text/javascript" src="{{ asset('showdown\dist\showdown.min.js') }}"></script>
+
+    <script>
+        $(document).ready(function() {
+           var compiles = function compile(){
+                //获取要转换的文字
+                var text = document.getElementById("topic-body").innerHTML;
+                //创建实例
+                var converter = new showdown.Converter();
+                //进行转换
+                var html = converter.makeHtml(text);
+                //展示到对应的地方  result便是id名称
+                document.getElementById("topic-body").innerHTML = html;
+            }
+            compiles();
+        });
+    </script>
 @stop
