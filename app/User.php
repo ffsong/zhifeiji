@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 use Illuminate\Auth\MustVerifyEmail as MustVerifyEmailTrait;
 use Auth;
+use Illuminate\Support\Facades\Log;
 use Spatie\Permission\Traits\HasRoles;
 use App\Handlers\Traits\ActiveUserHelper;
 use App\Handlers\Traits\LastActivedAtHelper;
@@ -23,18 +24,16 @@ class User extends Authenticatable implements MustVerifyEmailContract
         notify as protected laravelNotify;
     }
 
-    public function notify($instance)
-    {
-        // 如果要通知的人是当前用户，就不必通知了！
-        if ($this->id == Auth::id()) {
-            return;
-        }
 
+    public function notify($instance){
         // 只有数据库类型通知才需提醒，直接发送 Email 或者其他的都 Pass
         if (method_exists($instance, 'toDatabase')) {
             $this->increment('notification_count');
+            // 如果要通知的人是当前用户，就不必通知了！
+            if ($this->id == Auth::id()) {
+                return;
+            }
         }
-
         $this->laravelNotify($instance);
     }
 
